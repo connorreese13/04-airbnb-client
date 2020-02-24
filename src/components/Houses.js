@@ -39,10 +39,6 @@ class Houses extends React.Component {
       });
   }
   search = e => {
-    // let titleResult = this.state.houses.filter(house => {
-    //   return house.title.includes(e.target.value);
-    // });
-
     this.setState({
       filteredHouses: this.state.houses.filter(house => {
         return (
@@ -52,6 +48,17 @@ class Houses extends React.Component {
         );
       })
     });
+  };
+
+  houseHover = id => {
+    let houses = this.state.houses;
+    houses.map(e => {
+      e.selected = false;
+      return e;
+    });
+    let house = houses.find(e => e._id == id);
+    house.selected = true;
+    this.setState({ houses });
   };
   render() {
     return (
@@ -87,7 +94,7 @@ class Houses extends React.Component {
           <div className="grid four large">
             {// List of thumbnails
             this.state.filteredHouses.map((house, index) => (
-              <Thumbnail x={house} key={index} />
+              <Thumbnail x={house} key={index} onHouseHover={this.houseHover} />
             ))}
             ;
           </div>
