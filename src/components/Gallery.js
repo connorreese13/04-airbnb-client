@@ -6,13 +6,13 @@ class Gallery extends React.Component {
     selectedImage: this.props.x[0]
   };
 
-  componentGetProps(props) {
-    this.setState({ images: props.x });
-    this.setState({ selectedImage: this.props.x[0] });
-  }
-
   componentDidMount() {
     console.log(this.props.x);
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({ images: props.x });
+    this.setState({ selectedImage: props.x[0] });
   }
 
   selectImage = e => {
