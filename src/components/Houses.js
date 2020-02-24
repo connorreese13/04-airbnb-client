@@ -7,6 +7,7 @@ import "../styles/grid.css";
 import "../styles/maps.css";
 import "../styles/nav.css";
 import Thumbnail from "./Thumbnail.js";
+import Pin from "./Pin.js";
 
 class Houses extends React.Component {
   state = {
@@ -85,8 +86,8 @@ class Houses extends React.Component {
         <div className="grid map">
           <div className="grid four large">
             {// List of thumbnails
-            this.state.filteredHouses.map(house => (
-              <Thumbnail x={house} />
+            this.state.filteredHouses.map((house, index) => (
+              <Thumbnail x={house} key={index} />
             ))}
             ;
           </div>
@@ -95,7 +96,17 @@ class Houses extends React.Component {
               bootstrapURLKeys={this.state.map.key}
               center={this.state.map.center}
               zoom={this.state.map.zoom}
-            ></GoogleMap>
+            >
+              {// List of Pins
+              this.state.houses.map((house, index) => (
+                <Pin
+                  lat={house.lat}
+                  lng={house.lng}
+                  house={house}
+                  key={index}
+                />
+              ))}
+            </GoogleMap>
           </div>
         </div>
       </>
