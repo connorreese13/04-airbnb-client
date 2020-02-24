@@ -8,6 +8,7 @@ import "../styles/maps.css";
 import "../styles/nav.css";
 import Thumbnail from "./Thumbnail.js";
 import Pin from "./Pin.js";
+import Nav from "./Nav.js";
 
 class Houses extends React.Component {
   state = {
@@ -63,14 +64,7 @@ class Houses extends React.Component {
   render() {
     return (
       <>
-        <nav>
-          <a href="/" className="logo"></a>
-          <div className="profile">
-            <a href="/plus" className="button">
-              <span>Airbnb Plus</span>
-            </a>
-          </div>
-        </nav>
+        <Nav></Nav>
         <div className="filters">
           <select>
             <option value="">Min Bedrooms: 1</option>
