@@ -141,8 +141,12 @@ class House extends React.Component {
                     <small>per night</small>
                   </h3>
                   <small>
-                    <i className="fas fa-star"></i>
-                    <i className="far fa-star"></i>
+                    {[...Array(this.state.house.rating)].map((e, index) => {
+                      return <i key={index} className="fas fa-star"></i>;
+                    })}
+                    {[...Array(5 - this.state.house.rating)].map((e, index) => {
+                      return <i key={index} className="far fa-star"></i>;
+                    })}
                     <span>{this.state.reviews.length} Reviews</span>
                   </small>
                   <form className="small">
