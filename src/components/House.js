@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
-import Nav from "./Nav.js";
 // Components
+import Nav from "./Nav.js";
+import Gallery from "./Gallery.js";
 
 // CSS
 import "../styles/cards.css";
@@ -44,14 +45,7 @@ class House extends React.Component {
     return (
       <>
         <Nav></Nav>
-        <div className="gallery">
-          <div className="image-main"></div>
-          <div className="previews">
-            {this.state.house.images.map((image, i) => (
-              <div className="preview" key={i}></div>
-            ))}
-          </div>
-        </div>
+        <Gallery x={this.state.house.images} />
         <div className="grid medium">
           <div className="grid sidebar-right">
             <div className="content">
@@ -63,7 +57,12 @@ class House extends React.Component {
                 </span>
               </small>
               <div className="user">
-                <div className="avatar"></div>
+                <div
+                  className="avatar"
+                  style={{
+                    backgroundImage: `url(${this.state.house.host.avatar})`
+                  }}
+                ></div>
                 <div className="name">
                   <small>Hosted by</small>
                   <span>{this.state.house.host.name}</span>
