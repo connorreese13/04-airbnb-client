@@ -3,6 +3,7 @@ import axios from "axios";
 // Components
 import Nav from "./Nav.js";
 import Gallery from "./Gallery.js";
+import Reviews from "./Reviews.js";
 
 // CSS
 import "../styles/cards.css";
@@ -35,6 +36,17 @@ class House extends React.Component {
         console.log(res.data);
         this.setState({
           house: res.data
+        });
+      })
+      .catch(err => {
+        console.log({ err });
+      });
+    axios
+      .get(`${process.env.REACT_APP_API}/reviews`)
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          reviews: res.data
         });
       })
       .catch(err => {
@@ -106,32 +118,7 @@ class House extends React.Component {
                   </ul>
                 </div>
               </div>
-              <div className="reviews">
-                <h2>
-                  {`${this.state.reviews.length} `}
-                  Reviews
-                </h2>
-                {this.state.reviews.map((review, i) => {
-                  return (
-                    <div className="card review" key={i}>
-                      <div className="content">
-                        <div className="user">
-                          <div className="avatar"></div>
-                          <div className="name">
-                            <span>{review.author.name}</span>
-                            <small>{review.author.location}</small>
-                          </div>
-                        </div>
-                        <div className="rating">
-                          <i className="fas fa-star"></i>
-                          <i className="far fa-star"></i>
-                        </div>
-                        <p>{review.content}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <Reviews review={this.state.reviews} />
             </div>
             <div className="sidebar">
               <div className="card shadow">
@@ -153,7 +140,9 @@ class House extends React.Component {
                     <div className="group">
                       <label>Guests</label>
                       <select>
-                        <option>1 guests</option>
+                        {[...Array(this.state.house.guests)].map((e, index) => {
+                          return <option>{index + 1} guests</option>;
+                        })}
                       </select>
                     </div>
                     <div className="group">
